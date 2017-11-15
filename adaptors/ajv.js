@@ -5,7 +5,10 @@ const JsonSchemaDraft04 = require("../common/draft-04")
 module.exports = {
   name: "ajv",
   validateOAS3({ content }) {
-    const ajv = new Ajv({ allErrors: true })
+    const ajv = new Ajv({
+      allErrors: true,
+      unknownFormats: ["uri-reference"]
+    })
     ajv.addSchema(JsonSchemaDraft04)
     ajv.validate(OpenAPISchema, content).errors
     return new Promise(function(resolve, reject) {

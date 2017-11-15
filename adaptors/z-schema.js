@@ -4,7 +4,9 @@ const OpenAPISchema = require("../common/openapi-schema")
 module.exports = {
   name: "z-schema",
   validateOAS3({ content }) {
-    const validator = new ZSchema()
+    const validator = new ZSchema({
+      ignoreUnknownFormats: true
+    })
     validator.validate(content, OpenAPISchema)
     return new Promise(function(resolve, reject) {
       resolve(validator.getLastErrors())
