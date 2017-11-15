@@ -1,0 +1,16 @@
+const Djv = require("djv")
+const OpenAPISchema = require("../common/openapi-schema")
+
+module.exports = {
+  name: "djv",
+  validateOAS3({ content }) {
+    const djv = new Djv()
+    djv.addSchema("openApi3", OpenAPISchema)
+    return new Promise(function(resolve, reject) {
+      resolve(djv.validate("openApi3", content))
+    });
+  },
+  validateSwagger2({ content }) {
+    console.error("TODO: implement djv swagger2")
+  }
+}
