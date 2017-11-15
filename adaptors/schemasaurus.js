@@ -4,7 +4,14 @@ const OpenAPISchema = require("../common/openapi-schema")
 module.exports = {
   name: "schemasaurus",
   validateOAS3({ content }) {
-    const validator = s.newValidator(OpenAPISchema)
+    const validator = s.newValidator(OpenAPISchema, {
+      formats: {
+        "uri-reference": {
+          regex: /.*/,
+          message: "dummy uri-reference validator"
+        }
+      }
+    })
     return new Promise(function(resolve, reject) {
       resolve(validator(content))
     });
