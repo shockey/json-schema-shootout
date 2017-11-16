@@ -1,5 +1,6 @@
 const TV4 = require("tv4")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "tv4",
@@ -10,6 +11,9 @@ module.exports = {
     });
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement tv4 swagger2")
+    const res = TV4.validateMultiple(content, SwaggerSchema)
+    return new Promise(function(resolve, reject) {
+      resolve(res.errors)
+    });
   }
 }

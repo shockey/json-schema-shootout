@@ -1,5 +1,6 @@
 const Jsck = require("jsck")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "jsck",
@@ -8,9 +9,13 @@ module.exports = {
     const res = validate(content)
     return new Promise(function(resolve, reject) {
       resolve(validate.errors)
-    });
+    })
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement jsck swagger2")
+    const validate = new Jsck.draft4(SwaggerSchema)
+    const res = validate(content)
+    return new Promise(function(resolve, reject) {
+      resolve(validate.errors)
+    })
   }
 }

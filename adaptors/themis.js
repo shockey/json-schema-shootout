@@ -1,5 +1,6 @@
 const Themis = require("themis")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "themis",
@@ -11,6 +12,10 @@ module.exports = {
     });
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement themis swagger2")
+    Themis.registerFormat("uri-reference", () => true)
+    const validator = Themis.validator(SwaggerSchema)
+    return new Promise(function(resolve, reject) {
+      resolve(validator(content, "0"))
+    });
   }
 }

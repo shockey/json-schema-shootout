@@ -1,5 +1,6 @@
 const Skeemas = require("skeemas")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "skeemas",
@@ -10,6 +11,9 @@ module.exports = {
     });
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement skeemas swagger2")
+    const res = Skeemas.validate(content, SwaggerSchema)
+    return new Promise(function(resolve, reject) {
+      resolve(res.errors)
+    });
   }
 }

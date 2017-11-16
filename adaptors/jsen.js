@@ -1,5 +1,6 @@
 const Jsen = require("jsen")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "jsen",
@@ -11,6 +12,10 @@ module.exports = {
     });
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement jsen swagger2")
+    const validate = Jsen(SwaggerSchema, { greedy: true })
+    const res = validate(content)
+    return new Promise(function(resolve, reject) {
+      resolve(validate.errors)
+    });
   }
 }

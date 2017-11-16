@@ -1,5 +1,6 @@
 const JsonSchema = require("jsonschema")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "JSONSchema",
@@ -11,6 +12,10 @@ module.exports = {
     })
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement JSONSchema swagger2")
+    const validator = new JsonSchema.Validator()
+    const res = validator.validate(content, SwaggerSchema)
+    return new Promise(function(resolve, reject) {
+      resolve(res.errors)
+    })
   }
 }

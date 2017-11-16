@@ -1,5 +1,6 @@
 const IsMyJsonValid = require("is-my-json-valid")
 const OpenAPISchema = require("../common/openapi-schema")
+const SwaggerSchema = require("../common/swagger-schema")
 
 module.exports = {
   name: "is-my-json-valid",
@@ -8,9 +9,13 @@ module.exports = {
     validate(content)
     return new Promise(function(resolve, reject) {
       resolve(validate.errors)
-    });
+    })
   },
   validateSwagger2({ content }) {
-    console.error("TODO: implement is-my-json-valid swagger2")
+    const validate = new IsMyJsonValid(SwaggerSchema, { greedy: true, verbose: true })
+    validate(content)
+    return new Promise(function(resolve, reject) {
+      resolve(validate.errors)
+    })
   }
 }
