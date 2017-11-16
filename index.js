@@ -35,4 +35,5 @@ MESSAGE:   ${err.message || "(no message)"}`)
       console.log('\n\n\n\n')
     }
   })
+  return res
 }, {})
